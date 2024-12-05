@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Recommendation Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>UC02</h2>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <h1>Results for {{ mobile_name }}</h1>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% else %}
+                <p class="category-sort">Category: <span>{{ category_sort }}</span></p>
+                <div class="section">
+                    <h2>Online Vendors</h2>
+                    <div class="vendor-list">
+                    {% for vendor in online_vendors %}
+                        <div class="vendor-card {{ 'recommended' if loop.index == 1 }}">
+                            {% set img_src = url_for('static', filename='vendor_images/' + vendor.vendor + '.png') %}
+                            {% set default_img_src = url_for('static', filename='vendor_images/default.png') %}
+                            <img src="{{ img_src }}" alt="{{ vendor.vendor }}" onerror="this.onerror=null; this.src='{{ default_img_src }}';">
+                            <div class="vendor-info">
+                                <h3>{{ vendor.vendor }}</h3>
+                                {% if loop.index == 1 %}
+                                    <span class="label">Recommended Vendor</span>
+                                {% endif %}
+                                <p>Price: ₹{{ vendor.price }}</p>
+                                <p>Rating: {{ vendor.rating }}</p>
+                                <p>Delivery Days: {{ vendor.delivery_days }}</p>
+                                <a href="{{ vendor.buy_link }}" class="buy-link">Check out</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div class="section offline-section">
+                    <h2>Offline Vendors</h2>
+                    <div class="vendor-list">
+                    {% for vendor in offline_vendors %}
+                        <div class="vendor-card {{ 'recommended' if loop.index == 1 }}">
+                            {% set img_src = url_for('static', filename='vendor_images/' + vendor.vendor + '.png') %}
+                            {% set default_img_src = url_for('static', filename='vendor_images/default.png') %}
+                            <img src="{{ img_src }}" alt="{{ vendor.vendor }}" onerror="this.onerror=null; this.src='{{ default_img_src }}';">
+                            <div class="vendor-info">
+                                <h3>{{ vendor.vendor }}</h3>
+                                {% if loop.index == 1 %}
+                                    <span class="label">Recommended Vendor</span>
+                                {% endif %}
+                                <p>Price: ₹{{ vendor.price }}</p>
+                                <p>Rating: {{ vendor.rating }}</p>
+                                <p>Delivery days: {{ vendor.delivery_days }}</p>
+                                <p>Contact: {{ vendor.contact }}</p>
+                                <p>Address: {{ vendor.address }}</p>
+                                {% if lat and lon%}
+                                <p>Distance: {{ "%.2f" | format(vendor.distance) }} km</p>
+                                {% endif %}
+                                <a href="https://www.google.com/maps/dir/?api=1&destination={{ vendor.latitude }},{{ vendor.longitude }}" class="map-link">Get Directions</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

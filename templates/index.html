@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <h2>SAP-UC02</h2>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <h1>Mobile Vendor Comparison System</h1>
+            <p>Discover the perfect vendor for your mobile needs with our advanced comparison system that allows users to find the best mobile deals from various vendors. It includes filter options for price, rating, and delivery days, as well as a location-based filter.</p>
+            
+            <form action="{{ url_for('result') }}" method="post" id="search-form">
+                <div class="input-group">
+                    <input type="text" name="query" placeholder="Enter your query" required>
+                </div>
+                
+                <div class="filter-group">
+                    <input type="checkbox" id="filter_location" name="filter_location" onchange="toggleLocation()">
+                    <label for="filter_location">Filter based on location</label>
+                </div>
+                
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

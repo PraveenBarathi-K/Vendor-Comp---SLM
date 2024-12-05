@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about_styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>UC02</h2>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="showcase">
+                <h1>About Us</h1>
+                <p>Welcome to Team 24, your ultimate destination for mobile vendor comparisons. We are dedicated to helping you find the best mobile deals with our advanced and user-friendly recommendation system.</p>
+                <p>Our mission is to simplify your search for mobile vendors by providing comprehensive comparisons based on price, rating, delivery days, and location. We strive to offer a seamless and efficient way to connect you with top vendors that meet your needs.</p>
+                <p>We hope you enjoy our service as much as we enjoy offering it to you. If you have any questions or feedback, please don't hesitate to contact us.</p>
+                <p>Sincerely,<br>The UC02 Team 24</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
